@@ -4,6 +4,7 @@
     together contain the keys to unlock all boxes
 """
 
+
 def canUnlockAll(boxes):
     """ Determine if all boxes can be unlocked """
     keys = [0]
