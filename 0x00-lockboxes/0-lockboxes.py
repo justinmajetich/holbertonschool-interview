@@ -7,7 +7,7 @@
 
 def canUnlockAll(boxes):
     """ Determine if all boxes can be unlocked """
-    if boxes and type(boxes) == list:
+    if boxes:
         keys = [0]
         keysNeeded = [i[0] for i in enumerate(boxes)]
 
