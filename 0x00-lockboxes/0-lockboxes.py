@@ -7,14 +7,17 @@
 
 def canUnlockAll(boxes):
     """ Determine if all boxes can be unlocked """
-    keys = [0]
-    keysNeeded = [i[0] for i in enumerate(boxes)]
+    if boxes:
+        keys = [0]
+        keysNeeded = [i[0] for i in enumerate(boxes)]
 
-    # Collect keys from all unlockable boxes beginning with 0
-    collectKeys(boxes, keys)
+        # Collect keys from all unlockable boxes beginning with 0
+        collectKeys(boxes, keys)
 
-    # Return true or false depending on whether keys present match key needed
-    return sorted(keys) == keysNeeded
+        # Return true or false depending on whether keys present match key needed
+        return sorted(keys) == keysNeeded
+    else:
+        return False
 
 
 def collectKeys(boxes, keys, key=0):
