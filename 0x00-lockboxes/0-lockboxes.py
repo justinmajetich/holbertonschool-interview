@@ -22,8 +22,7 @@ def canUnlockAll(boxes):
 
 def collectKeys(boxes, keys, key=0):
     """ Recursively collect all unique keys from all boxes """
-    if type(boxes[key]) == list:
-        for newKey in boxes[key]:
-            if newKey not in keys and newKey < len(boxes):
-                keys.append(newKey)
-                collectKeys(boxes, keys, newKey)
+    for newKey in boxes[key]:
+        if newKey not in keys and newKey < len(boxes):
+            keys.append(newKey)
+            collectKeys(boxes, keys, newKey)
