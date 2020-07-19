@@ -7,7 +7,7 @@
 
 def canUnlockAll(boxes):
     """ Determine if all boxes can be unlocked """
-    if boxes:
+    if boxes and type(boxes) == list:
         keys = [0]
         keysNeeded = [i[0] for i in enumerate(boxes)]
 
@@ -22,7 +22,8 @@ def canUnlockAll(boxes):
 
 def collectKeys(boxes, keys, key=0):
     """ Recursively collect all unique keys from all boxes """
-    for newKey in boxes[key]:
-        if newKey not in keys:
-            keys.append(newKey)
-            collectKeys(boxes, keys, newKey)
+    if type(boxes[key]) == list:
+        for newKey in boxes[key]:
+            if type(newKey) == int and newKey not in keys and (newKey > -1 and newKey < len(boxes)):
+                keys.append(newKey)
+                collectKeys(boxes, keys, newKey)
