@@ -14,7 +14,7 @@ def canUnlockAll(boxes):
         # Collect keys from all unlockable boxes beginning with 0
         collectKeys(boxes, keys)
 
-        # Return true or false depending on whether keys present match key needed
+        # Return true or false depending on if keys present match key needed
         return sorted(keys) == keysNeeded
     else:
         return False
@@ -24,6 +24,6 @@ def collectKeys(boxes, keys, key=0):
     """ Recursively collect all unique keys from all boxes """
     if type(boxes[key]) == list:
         for newKey in boxes[key]:
-            if type(newKey) == int and newKey not in keys and (newKey > -1 and newKey < len(boxes)):
+            if newKey not in keys and newKey < len(boxes):
                 keys.append(newKey)
                 collectKeys(boxes, keys, newKey)
