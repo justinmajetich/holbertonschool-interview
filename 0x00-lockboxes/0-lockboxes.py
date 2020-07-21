@@ -17,7 +17,7 @@ def canUnlockAll(boxes):
         # Return true or false depending on if keys present match key needed
         return sorted(keys) == keysNeeded
     else:
-        return False
+        return True
 
 
 def collectKeys(boxes, keys, key=0):
