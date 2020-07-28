@@ -28,12 +28,20 @@ listint_t *insert_node(listint_t **head, int number)
         return (new_node);
     }
 
+    /* If new node n is less than starting node n */
+    if (new_node->n < (*head)->n)
+    {
+        new_node->next = *head;
+        *head = new_node;
+        return (new_node);
+    }
+
     /* Traverse list to find proper insertion place */
     focus_node = *head;
     while (focus_node->next != NULL)
     {
         /* If number is less than next number in list, insert between current and next */
-        if (number <= focus_node->next->n)
+        if (new_node->n <= focus_node->next->n)
         {
             new_node->next = focus_node->next;
             focus_node->next = new_node;
