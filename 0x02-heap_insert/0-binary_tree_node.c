@@ -5,7 +5,9 @@
  *
  * @parent: Pointer to the parent node
  * @value: Value to attach to new node
- */
+ *
+ * Return: Returns pointer to new node, or NULL on fail 
+*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
 	binary_tree_t *new_node = NULL;
