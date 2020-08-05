@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 
 size_t binary_tree_size(const heap_t *tree);
-void position_inserted_node(heap_t *inserted);
+void position_inserted_node(heap_t *inserted, heap_t **root);
 void determine_insertion_path(size_t size, my_stack_t **new_node);
 void insert_new_node(heap_t *root, heap_t *new_node, my_stack_t *directions);
 
@@ -41,13 +41,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	insert_new_node(*root, new_node, directions);
 
 	/* Bubble up to proper position */
-	position_inserted_node(new_node);
-
-	/* Check if new node is now root */
-	if (new_node->parent == NULL)
-	{
-		*root = new_node;
-	}
+	position_inserted_node(new_node, root);
 
 	/* Return pointer to inserted node */
 	return (new_node);
@@ -56,8 +50,9 @@ heap_t *heap_insert(heap_t **root, int value)
 /**
  * position_inserted_node - bubble-up inserted node to sorted position
  * @inserted: Newly inserted node
+ * @root: Root of heap
  */
-void position_inserted_node(heap_t *inserted)
+void position_inserted_node(heap_t *inserted, heap_t **root)
 {
 	heap_t *temp = malloc(sizeof(heap_t));
 
@@ -69,18 +64,42 @@ void position_inserted_node(heap_t *inserted)
 		temp->left = inserted->parent->left;
 		temp->right = inserted->parent->right;
 
+		if (temp->parent != NULL)
+		{
+			if (temp->parent->left == inserted->parent)
+			{
+				temp->parent->left = inserted;
+			}
+			else
+			{
+				temp->parent->right = inserted;
+			}
+		}
+
 		inserted->parent->parent = inserted;
 		inserted->parent->left = inserted->left;
 		inserted->parent->right = inserted->right;
 
-		inserted->parent = temp->parent;
 		if (temp->left != inserted)
 		{
 			inserted->left = temp->left;
+			if (temp->left != NULL)
+				temp->left->parent = inserted;
+			inserted->right = inserted->parent;
 		}
 		else
 		{
 			inserted->right = temp->right;
+			if (temp->right != NULL)
+				temp->right->parent = inserted;
+			inserted->left = inserted->parent;
+		}
+		inserted->parent = temp->parent;
+
+		/* Check if new node is now root */
+		if (inserted->parent == NULL)
+		{
+			*root = inserted;
 		}
 	}
 }
