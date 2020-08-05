@@ -19,6 +19,11 @@ heap_t *heap_insert(heap_t **root, int value)
 	size_t tree_size = 0;
 	my_stack_t *directions = NULL;
 
+	if (root == NULL)
+	{
+		return (NULL);
+	}
+
 	/* If pointer to root is NULL, init root with new node */
 	if (*root == NULL)
 	{
