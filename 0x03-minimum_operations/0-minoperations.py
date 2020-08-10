@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" Calculate the minimun operations necessary to copy/paste
+    given character to appear n times.
+"""
 
 
 def minOperations(n):
