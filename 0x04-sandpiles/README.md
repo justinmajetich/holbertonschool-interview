@@ -1,0 +1,1 @@
+Function to compute the sum of two sandpiles, each represented as a 3x3 grid.
