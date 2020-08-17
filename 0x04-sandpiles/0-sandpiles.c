@@ -12,14 +12,17 @@ void print_grid(int grid[3][3]);
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	/* Add sandpiles together */
-	add_sandpiles(grid1, grid2);
-
-	/* Check if sum pile is stable */
-	while (sandpiles_stability(grid1))
+	if (grid1 && grid2)
 	{
-		/* If sum is unstable, print and topple */
-		sandpiles_topple(grid1);
+		/* Add sandpiles together */
+		add_sandpiles(grid1, grid2);
+
+		/* Check if sum pile is stable */
+		while (sandpiles_stability(grid1))
+		{
+			/* If sum is unstable, print and topple */
+			sandpiles_topple(grid1);
+		}
 	}
 }
 
