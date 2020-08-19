@@ -12,17 +12,15 @@ void print_grid(int grid[3][3]);
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	if (grid1 && grid2)
-	{
-		/* Add sandpiles together */
-		add_sandpiles(grid1, grid2);
 
-		/* Check if sum pile is stable */
-		while (sandpiles_stability(grid1))
-		{
-			/* If sum is unstable, print and topple */
-			sandpiles_topple(grid1);
-		}
+	/* Add sandpiles together */
+	add_sandpiles(grid1, grid2);
+
+	/* Check if sum pile is stable */
+	while (sandpiles_stability(grid1))
+	{
+		/* If sum is unstable, print and topple */
+		sandpiles_topple(grid1);
 	}
 }
 
@@ -32,6 +30,12 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
  */
 void sandpiles_topple(int grid[3][3])
 {
+	int buffer[3][3] = {
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
+    };
+
 	int x, y;
 	/* Iterate through grid toppling sandpile overflow (size > 3) */
 	for (y = 0; y < 3; y++)
@@ -46,22 +50,23 @@ void sandpiles_topple(int grid[3][3])
 
 				/* Distribute 1 grain to left pile, if exists */
 				if (x - 1 >= 0)
-					grid[y][x - 1] += 1;
+					buffer[y][x - 1] += 1;
 
 				/* Distribute 1 grain to above pile, if exists */
 				if (y - 1 >= 0)
-					grid[y - 1][x] += 1;
+					buffer[y - 1][x] += 1;
 
 				/* Distribute 1 grain to right pile, if exists */
 				if (x + 1 <= 2)
-					grid[y][x + 1] += 1;
+					buffer[y][x + 1] += 1;
 
 				/* Distribute 1 grain to below pile, if exists */
 				if (y + 1 <= 2)
-					grid[y + 1][x] += 1;
+					buffer[y + 1][x] += 1;
 			}
 		}
 	}
+	add_sandpiles(grid, buffer);
 }
 
 /**
