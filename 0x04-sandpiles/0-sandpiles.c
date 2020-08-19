@@ -31,10 +31,10 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 void sandpiles_topple(int grid[3][3])
 {
 	int buffer[3][3] = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
+	};
 
 	int x, y;
 	/* Iterate through grid toppling sandpile overflow (size > 3) */
