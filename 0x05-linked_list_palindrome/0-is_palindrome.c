@@ -1,6 +1,6 @@
 #include "lists.h"
 
-int is_equal(listint_t *left, listint_t *right);
+int is_equal(listint_t **left, listint_t *right);
 
 /**
  * is_palindrome - Detects if the contents of linked list are palindromic
@@ -15,7 +15,7 @@ int is_palindrome(listint_t **head)
         return (1);
 
     /* Check if list is palindrome */
-    return is_equal(*head, *head);
+    return is_equal(head, *head);
 }
 
 /**
@@ -25,7 +25,7 @@ int is_palindrome(listint_t **head)
  * 
  * Return: 1 if values match; otherwise, 0
  */
-int is_equal(listint_t *left, listint_t *right)
+int is_equal(listint_t **left, listint_t *right)
 {
     /* Base case is end of list */
     if (right == NULL)
@@ -36,7 +36,7 @@ int is_equal(listint_t *left, listint_t *right)
         return (0);
 
     /* Move left pointer forward */
-    left = left->next;
+	*left = (*left)->next;
 
-    return (1);
+	return (right->n == (*left)->n);
 }
