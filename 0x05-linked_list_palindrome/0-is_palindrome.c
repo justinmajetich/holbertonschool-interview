@@ -27,6 +27,8 @@ int is_palindrome(listint_t **head)
  */
 int is_equal(listint_t **left, listint_t *right)
 {
+	int is_palin = 0;
+
 	/* Base case is end of list */
 	if (right == NULL)
 		return (1);
@@ -35,8 +37,11 @@ int is_equal(listint_t **left, listint_t *right)
 	if (!is_equal(left, right->next))
 		return (0);
 
+	/* Check is node pair is palindrome */
+	is_palin = (right->n == (*left)->n);
+
     /* Move left pointer forward */
 	*left = (*left)->next;
 
-	return (right->n == (*left)->n);
+	return is_palin;
 }
