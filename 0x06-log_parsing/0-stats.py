@@ -46,4 +46,3 @@ try:
 
 except KeyboardInterrupt:
     printCodeTracking(totalFileSize, codeTracker)
-    exit(0)
