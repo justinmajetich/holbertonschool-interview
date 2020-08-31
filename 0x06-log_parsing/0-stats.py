@@ -41,8 +41,9 @@ try:
         else:
             loopCounter += 1
 
+    # Print stats at end of input stream        
+    printCodeTracking(totalFileSize, codeTracker)
+
 except KeyboardInterrupt:
     printCodeTracking(totalFileSize, codeTracker)
     exit(0)
-finally:
-    printCodeTracking(totalFileSize, codeTracker)
