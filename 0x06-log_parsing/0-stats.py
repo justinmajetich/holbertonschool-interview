@@ -40,6 +40,9 @@ try:
             loopCounter = 0
         else:
             loopCounter += 1
+
 except KeyboardInterrupt:
     printCodeTracking(totalFileSize, codeTracker)
     exit(0)
+finally:
+    printCodeTracking(totalFileSize, codeTracker)
