@@ -32,7 +32,8 @@ try:
 
         # Update persistent size and status counters
         totalFileSize += int(fileSize)
-        codeTracker[statusCode] += 1
+        if statusCode in codeTracker:
+            codeTracker[statusCode] += 1
 
         # Keep track of how many logs have been read in current print loop
         if loopCounter == 9:
