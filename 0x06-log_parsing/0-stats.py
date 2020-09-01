@@ -28,19 +28,22 @@ loopCounter = 0
 try:
     for line in stdin:
         # Pull necessary fields from log line
-        statusCode, fileSize = [part for part in line.split()[-2:]]
+        lineSplit = line.split()
 
-        # Update persistent size and status counters
-        totalFileSize += int(fileSize)
-        if statusCode in codeTracker:
-            codeTracker[statusCode] += 1
+        if len(lineSplit) >= 2:
+            statusCode, fileSize = [part for part in lineSplit[-2:]]
 
-        # Keep track of how many logs have been read in current print loop
-        if loopCounter == 9:
-            printCodeTracking(totalFileSize, codeTracker)
-            loopCounter = 0
-        else:
-            loopCounter += 1
+            # Update persistent size and status counters
+            totalFileSize += int(fileSize)
+            if statusCode in codeTracker:
+                codeTracker[statusCode] += 1
+
+                # Keep track of how many logs have been read in print loop
+                if loopCounter == 9:
+                    printCodeTracking(totalFileSize, codeTracker)
+                    loopCounter = 0
+                else:
+                    loopCounter += 1
 
     # Print stats at end of input stream
     printCodeTracking(totalFileSize, codeTracker)
