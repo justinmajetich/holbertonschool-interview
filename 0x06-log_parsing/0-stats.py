@@ -12,10 +12,12 @@ def printCodeTracking(totalFileSize, codeTracker):
     # Print total size of data passed to date
     print('File size: ' + str(totalFileSize))
 
+    codeList = sorted(codeTracker.keys())
+
     # Print formatted count of requests by status code
-    for code, count in codeTracker.items():
-        if count != 0:
-            print(code + ': ' + str(count))
+    for code in codeList:
+        if codeTracker[code] != 0:
+            print(code + ': ' + str(codeTracker[code]))
 
 
 codeTracker = {
