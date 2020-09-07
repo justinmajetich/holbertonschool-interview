@@ -10,8 +10,8 @@ int run_cycle_check(listint_t *slow, listint_t *fast);
  */
 int check_cycle(listint_t *list)
 {
-	if (list)
-		return (run_cycle_check(list->next, list->next->next));
+	if (list && list->next)
+		return (run_cycle_check(list, list->next->next));
 	else
 		return (1);
 }
