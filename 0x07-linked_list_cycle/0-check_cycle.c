@@ -10,7 +10,10 @@ int run_cycle_check(listint_t *slow, listint_t *fast);
  */
 int check_cycle(listint_t *list)
 {
-	return (run_cycle_check(list->next, list->next->next));
+	if (list)
+		return (run_cycle_check(list->next, list->next->next));
+	else
+		return (1);
 }
 
 /**
@@ -22,7 +25,7 @@ int check_cycle(listint_t *list)
  */
 int run_cycle_check(listint_t *slow, listint_t *fast)
 {
-	if (!slow || !fast)
+	if (!slow || !fast || !fast->next)
 		return (0);
 	else if (fast == slow)
 		return (1);
