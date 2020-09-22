@@ -1,6 +1,6 @@
 #include "palindrome.h"
 
-int is_palindrome_utility(unsigned long n, unsigned long *nCopy);
+unsigned long reverse_number(unsigned long n);
 
 /**
  * is_palindrome - Determine if an integer is a palindrome.
@@ -10,28 +10,37 @@ int is_palindrome_utility(unsigned long n, unsigned long *nCopy);
  */
 int is_palindrome(unsigned long n)
 {
-	unsigned long nCopy = n;
+	unsigned long reverse;
 
-	return (is_palindrome_utility(n, &nCopy));
+	reverse = reverse_number(n);
+
+	while (n > 0)
+	{
+		if (n % 10 != reverse % 10)
+			return (0);
+		
+		n /= 10;
+		reverse /= 10;
+	}
+	return (1);
 }
 
 /**
- * is_palindrome_utility - Recursively scan an integer to detect palindrome.
- * @n: Number to check.
- * @nCopy: Duplicate of number to check.
+ * reverse_number - Reverses a number.
+ * @n: The number to reverse.
  *
- * Return: 1 if palindrome; otherwise, 0.
+ * Return: A number reversed.
  */
-int is_palindrome_utility(unsigned long n, unsigned long *nCopy)
+unsigned long reverse_number(unsigned long n)
 {
-	/* Base case */
-	if (n > 0 && n < 10)
-		return (n == *nCopy % 10);
+	unsigned long reverse = 0;
 
-	if (!is_palindrome_utility(n / 10, nCopy))
-		return (0);
+	while (n > 0)
+	{
+		reverse = (reverse * 10) + (n % 10);
 
-	*nCopy /= 10;
+		n /= 10;
+	}
 
-	return (n % 10 == *nCopy % 10);
+	return (reverse);
 }
