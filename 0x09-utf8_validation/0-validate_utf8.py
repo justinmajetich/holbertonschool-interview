@@ -9,6 +9,9 @@ def validUTF8(data):
     expectedBytesRemaining = 0
     insideCharacter = False
 
+    if len(data) == 0:
+        return False
+
     for number in data:
         # Convert number to binary string representation.
         binaryString = str(format(number, '08b'))
