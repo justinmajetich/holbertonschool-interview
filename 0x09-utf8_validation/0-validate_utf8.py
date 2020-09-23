@@ -6,22 +6,19 @@
 def validUTF8(data):
     """ Determine if data has valid UTF-8 encoding.
     """
-    expectedBytesRemaining = 0
+    expectedBytesRemaining = -1
     insideCharacter = False
-
-    if len(data) == 0:
-        return False
 
     for number in data:
         # Convert number to binary string representation.
         binaryString = str(format(number, '08b'))
 
-        # Break binary number into list of individual digits.
+        # Break binary number into list of individual integer digits.
         bits = list(map(int, binaryString))
 
         # If leading bit denotes single-byte character.
         if bits[0] == 0:
-            # If currently validating character.
+            # If currently validating character, encoding is invalid.
             if insideCharacter:
                 return False
 
@@ -29,7 +26,7 @@ def validUTF8(data):
         else:
             # If continuing character.
             if insideCharacter:
-                if bits[1] != 0:  # Invalid continuation byte.
+                if bits[1] != 0:  # Invalid continuation byte (valid is "10").
                     return False
                 else:  # Is valid continuation byte.
                     if expectedBytesRemaining == 1:
