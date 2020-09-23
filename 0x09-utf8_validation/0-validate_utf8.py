@@ -47,7 +47,7 @@ def validUTF8(data):
                 insideCharacter = True
 
     # Verify that data set did not end with incomplete character.
-    if expectedBytesRemaining == -1:
+    if expectedBytesRemaining != -1:
         return False
     else:
         return True
