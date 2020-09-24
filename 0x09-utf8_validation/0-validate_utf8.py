@@ -6,48 +6,17 @@
 def validUTF8(data):
     """ Determine if data has valid UTF-8 encoding.
     """
-    expectedBytesRemaining = -1
-    insideCharacter = False
+    # Use maks, to clean byte of anything beyond 8 least significant bits.
+    cleanByte = [rawByte & 0b11111111 for rawByte in data]
 
-    for number in data:
-        # Convert number to binary string representation.
-        binaryString = str(format(number, '08b'))
+    # Cast to byte type.
+    byte = bytes(cleanByte)
 
-        # Break binary number into list of individual integer digits.
-        bits = list(map(int, binaryString))
-
-        # If leading bit denotes single-byte character.
-        if bits[0] == 0:
-            # If currently validating character, encoding is invalid.
-            if insideCharacter:
-                return False
-
-        # If leading bit denotes new or continuing multi-byte character (is 1).
-        else:
-            # If continuing character.
-            if insideCharacter:
-                if bits[1] != 0:  # Invalid continuation byte (valid is "10").
-                    return False
-                else:  # Is valid continuation byte.
-                    if expectedBytesRemaining == 1:
-                        expectedBytesRemaining = -1
-                        insideCharacter = False
-                    else:
-                        expectedBytesRemaining -= 1
-
-            else:  # New multi-byte character.
-                #  Determine byte size of new character.
-                for bit in bits:
-                    if bit != 0:
-                        expectedBytesRemaining += 1
-
-                if expectedBytesRemaining < 1 or expectedBytesRemaining > 3:
-                    return False
-
-                insideCharacter = True
-
-    # Verify that data set did not end with incomplete character.
-    if expectedBytesRemaining != -1:
+    # Attempt to decode byte data.
+    try:
+        byte.decode()
+    except UnicodeDecodeError:
+        # If decoding fails, return False.
         return False
-    else:
-        return True
+
+    return True
