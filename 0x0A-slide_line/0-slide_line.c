@@ -1,6 +1,7 @@
 #include "slide_line.h"
 
 int slide_left(int *line, size_t size);
+int slide_right(int *line, size_t size);
 
 /**
  * slide_line - Add identical numbers left or right in an array.
@@ -53,7 +54,7 @@ int slide_left(int *line, size_t size)
         /* If current is non-zero, check for indentical preceding number to add to */
         if (line[current] != 0)
         {
-            if (current - 1 >= 0 && line[current] == line[current - 1] && addition_made == 0)
+            if (current != 0 && line[current] == line[current - 1] && addition_made == 0)
             {
                 line[current - 1] *= 2;
                 line[current] = 0;
@@ -74,7 +75,7 @@ int slide_left(int *line, size_t size)
  */
 int slide_right(int *line, size_t size)
 {
-    size_t current, look_ahead;
+    int current, look_ahead;
     int addition_made = 0; /* 0 = false, 1 = true */
 
     /* Move through line array right to left */
@@ -100,7 +101,7 @@ int slide_right(int *line, size_t size)
         /* If current is non-zero, check for indentical following number to add to */
         if (line[current] != 0)
         {
-            if (current + 1 < size && line[current] == line[current + 1] && addition_made == 0)
+            if (current + 1 < (int)size && line[current] == line[current + 1] && addition_made == 0)
             {
                 line[current + 1] *= 2;
                 line[current] = 0;
