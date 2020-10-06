@@ -1,8 +1,8 @@
 #include "menger.h"
 
 void generate_sponge(char **sponge, int row, int col, int size);
-void free_grid(int **grid, int size);
-void print_sponge(char **sponge);
+void free_sponge(char **grid, int size);
+void print_sponge(char **sponge, int size);
 char **alloc_grid(int size);
 
 /**
@@ -11,8 +11,8 @@ char **alloc_grid(int size);
  */
 void menger(int level)
 {
-	int y, x, size;
-	char **sponge;
+	int size;
+	char **sponge = NULL;
 
     /* Calculate sponge size based on it's level. */
 	size = pow(3, level);
@@ -22,9 +22,9 @@ void menger(int level)
 
 	generate_sponge(sponge, 0, 0, size);
 
-	print_sponge(sponge);
+	print_sponge(sponge, size);
 
-	free_grid(sponge, size);
+	free_sponge(sponge, size);
 }
 
 /**
@@ -105,11 +105,11 @@ char **alloc_grid(int size)
 }
 
 /**
- * free_grid - Free a 2D grid.
+ * free_sponge - Free a 2D grid.
  * @grid: Grid to free.
  * @size: Size of grid.
  */
-void free_grid(int **grid, int size)
+void free_sponge(char **grid, int size)
 {
 	int i;
 
@@ -121,9 +121,12 @@ void free_grid(int **grid, int size)
 /**
  * print_sponge - Print a menger sponge.
  * @sponge: Sponge to print.
+ * @size: Size of sponge being printed.
  */
-void print_sponge(char **sponge)
+void print_sponge(char **sponge, int size)
 {
+	int x, y;
+
 	for (y = 0; y < size; y++)
 	{
 		for (x = 0; x < size; x++)
