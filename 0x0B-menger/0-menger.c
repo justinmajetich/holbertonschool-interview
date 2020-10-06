@@ -17,14 +17,20 @@ void menger(int level)
     /* Calculate sponge size based on it's level. */
 	size = pow(3, level);
 
-	/* Generate blank 2D array to hold completed sponge. */
-	sponge = alloc_grid(size);
+	if (size > 0)
+	{
+		/* Generate blank 2D array to hold completed sponge. */
+		sponge = alloc_grid(size);
 
-	generate_sponge(sponge, 0, 0, size);
+		if (size > 1)
+			generate_sponge(sponge, 0, 0, size);
+		else
+			sponge[0][0] = '#';
 
-	print_sponge(sponge, size);
+		print_sponge(sponge, size);
 
-	free_sponge(sponge, size);
+		free_sponge(sponge, size);
+	}
 }
 
 /**
