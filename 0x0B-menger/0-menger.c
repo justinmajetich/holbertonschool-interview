@@ -10,12 +10,11 @@ char **alloc_grid(int size);
  */
 void menger(int level)
 {
-    int y, x, size;
+	int y, x, size;
 	char **sponge;
 
     /* Calculate sponge size based on*/
-    size = pow(3, level);
-    printf("Sponge size is %i\n", size);
+	size = pow(3, level);
 
 	/* Generate blank 2D array for complete sponge */
 	sponge = alloc_grid(size);
