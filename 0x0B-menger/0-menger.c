@@ -2,6 +2,7 @@
 
 void generate_sponge(char **sponge, int row, int col, int size);
 void free_grid(int **grid, int size);
+void print_sponge(char **sponge);
 char **alloc_grid(int size);
 
 /**
@@ -13,26 +14,21 @@ void menger(int level)
 	int y, x, size;
 	char **sponge;
 
-    /* Calculate sponge size based on*/
+    /* Calculate sponge size based on it's level. */
 	size = pow(3, level);
 
-	/* Generate blank 2D array for complete sponge */
+	/* Generate blank 2D array to hold completed sponge. */
 	sponge = alloc_grid(size);
 
 	generate_sponge(sponge, 0, 0, size);
 
-	for (y = 0; y < size; y++)
-	{
-		for (x = 0; x < size; x++)
-		{
-			putchar(sponge[y][x]);
-		}
-		putchar('\n');
-	}
+	print_sponge(sponge);
+
+	free_grid(sponge, size);
 }
 
 /**
- * generate_sponge - Generate a menger sponge.
+ * generate_sponge - Recursively generate a menger sponge on a blank grid.
  * @sponge: Empty 2D within which to initialize sponge.
  * @row: Starting row index.
  * @col: Starting column index.
@@ -47,16 +43,22 @@ void generate_sponge(char **sponge, int row, int col, int size)
 		{'#', '#', '#'}
 	};
 
+	/* Iterate through given segment of sponge */
 	for (y = 0; y < size; y += scalar)
 	{
 		for (x = 0; x < size; x += scalar)
 		{
+			/* If sponge is not at smallest unit, continue recursive subdivision */
 			if (size > 3)
 			{
-				if (unit[(row + y) / scalar][(col + x) / scalar] == '#')
+				/*
+				 * This if statement scales the index of the larger sponge segment
+				 * being inspected to a proportional index on the base sponge unit.
+				 */
+				if (unit[y / scalar][x / scalar] == '#')
 					generate_sponge(sponge, row + y, col + x, scalar);
 			}
-			else
+			else /* If smallest unit reached, copy single unit onto sponge */
 			{
 				sponge[row + x][col + y] = unit[x][y];
 			}
@@ -114,4 +116,20 @@ void free_grid(int **grid, int size)
 	for (i = 0; i < size; i++)
 		free(*(grid + i));
 	free(grid);
+}
+
+/**
+ * print_sponge - Print a menger sponge.
+ * @sponge: Sponge to print.
+ */
+void print_sponge(char **sponge)
+{
+	for (y = 0; y < size; y++)
+	{
+		for (x = 0; x < size; x++)
+		{
+			putchar(sponge[y][x]);
+		}
+		putchar('\n');
+	}
 }
