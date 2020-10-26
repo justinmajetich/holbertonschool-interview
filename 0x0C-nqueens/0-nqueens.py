@@ -6,13 +6,16 @@ import sys
 
 
 def solve_recursively(board, col):
-    """ Safely place queens column by column if possible """
+    """ Safely place queens column by column.
+        The function will continue to to backtrack,
+        even after a solution is printed, until
+        all solutions have been printed.
+    """
 
     # Base case (all queens safely placed)
     if col == len(board):
         print_solution(board, len(board))
         return
-        # return True
 
     for row in range(len(board)):
         # Validate current placement as safe
@@ -29,27 +32,24 @@ def solve_recursively(board, col):
 
 
 def validate_placement(board, col, row):
-    """ Determine if the queen can safely assume position """
+    """ Determine if the queen can safely be placed """
 
-    # Check leftward reach on row
+    # Check for leftward horizontal conflict
     for x in range(col, -1, -1):
         if board[row][x] == 1:
-            # print("Leftward conflict")
             return False
 
-    # Check upward diagnol reach
+    # Check for upward diagnol conflict
     x = col
     for y in range(row, -1, -1):
         if board[y][x] == 1:
-            # print("Upward diagnol conflict")
             return False
         x -= 1
 
-    # Check downward diagnol reach
+    # Check for downward diagnol conflict
     x = col
     for y in range(row, len(board)):
         if board[y][x] == 1:
-            # print("Downward diagnol conflict")
             return False
         x -= 1
 
@@ -105,4 +105,3 @@ board = [[0 for col in range(n)] for row in range(n)]
 
 # Solve board if possible
 solve_recursively(board, 0)
-# print_solution(board, n)
