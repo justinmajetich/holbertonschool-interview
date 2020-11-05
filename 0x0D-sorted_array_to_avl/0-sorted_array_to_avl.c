@@ -79,7 +79,10 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 		return (NULL);
 
 	/* Get middle index of array. */
-	mid = (size / 2) - 1;
+	if (size % 2 == 0)
+		mid = (size / 2) - 1;
+	else
+		mid = size / 2;
 
 	/* Create root node from middle array value. */
 	root = avl_tree_node(NULL, array[mid]);
