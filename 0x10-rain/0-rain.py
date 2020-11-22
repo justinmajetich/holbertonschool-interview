@@ -20,8 +20,9 @@ def find_volume_between_walls(walls, left, right):
             right_wall_index = i
             break
         width += 1
-    
+
     return [(left_wall * width) - filled_space, right_wall_index]
+
 
 def rain(walls):
     """
@@ -29,7 +30,6 @@ def rain(walls):
     """
     totlal_volume = 0
     size = len(walls)
-
 
     # If list is empty return 0.
     if size <= 0:
