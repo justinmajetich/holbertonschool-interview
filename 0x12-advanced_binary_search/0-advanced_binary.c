@@ -52,14 +52,13 @@ size_t right, int value, long int *match)
 	if (array[mid] == value)
 	{
 		*match = mid;
-		if (right - left > 1)
-			mid++;
+		/* if (right - left > 1) mid++; */
 	}
 	else
-    {
-        if (array[mid] < value) /* search right */
-		    return (recurse_helper(array, mid + 1, right, value, match));
-    }
+	{
+		if (array[mid] < value) /* search right */
+			return (recurse_helper(array, mid + 1, right, value, match));
+	}
 
 	if (mid != 0)
 		return (recurse_helper(array, left, mid, value, match));
