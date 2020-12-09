@@ -36,7 +36,7 @@ size_t right, int value, long int *match)
 {
 	size_t i = left, mid;
 
-	if (left > right)
+	if (left >= right)
 		return (*match);
 
 	/* print search progress */
@@ -55,11 +55,14 @@ size_t right, int value, long int *match)
 		if (right - left > 1)
 			mid++;
 	}
-	else if (array[mid] < value) /* search right */
-		return (recurse_helper(array, mid + 1, right, value, match));
+	else
+    {
+        if (array[mid] < value) /* search right */
+		    return (recurse_helper(array, mid + 1, right, value, match));
+    }
 
 	if (mid != 0)
-		return (recurse_helper(array, left, mid - 1, value, match));
+		return (recurse_helper(array, left, mid, value, match));
 	else
 		return (*match);
 }
