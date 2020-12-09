@@ -52,8 +52,7 @@ size_t right, int value, long int *match)
 	if (array[mid] == value)
 	{
 		*match = mid;
-		if (right - left > 1)
-			mid++;
+		/* if (right - left > 1) mid++; */
 	}
 	else
 	{
