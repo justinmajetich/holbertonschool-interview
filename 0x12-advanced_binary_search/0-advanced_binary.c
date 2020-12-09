@@ -60,8 +60,8 @@ size_t right, int value, long int *match)
 			return (recurse_helper(array, mid + 1, right, value, match));
 	}
 
-	if (mid != 0)
-		return (recurse_helper(array, left, mid, value, match));
-	else
-		return (*match);
+	/* if (mid != 0) */
+	return (recurse_helper(array, left, mid, value, match));
+	/* else
+		return (*match); */
 }
