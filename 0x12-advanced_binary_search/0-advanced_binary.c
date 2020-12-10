@@ -39,7 +39,7 @@ size_t right, int value, long int *match)
 	if (left >= right)
 	{
 		/* if still a valid sub-array, print before returning */
-		if (left == right)
+		if (*match == -1 && left == right)
 			printf("Searching in array: %d\n", array[i]);
 
 		return (*match);
