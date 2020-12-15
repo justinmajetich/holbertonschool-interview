@@ -8,6 +8,7 @@ import requests
 def count_words(subreddit, word_list, count_list=[], next_page=None):
     """Request subreddit recursively using pagination
     """
+
     # convert word_list to dict with count
     if not count_list:
         for word in word_list:
@@ -50,6 +51,7 @@ def count_words(subreddit, word_list, count_list=[], next_page=None):
         sorted_list = sorted(count_list,
                              key=lambda word: (word['count'], word['keyword']),
                              reverse=True)
+        resolve_duplicates(sorted_list)
         keywords_matched = 0
         # print keywords and counts
         for word in sorted_list:
@@ -57,3 +59,18 @@ def count_words(subreddit, word_list, count_list=[], next_page=None):
                 print('{}: {}'.format(word['keyword'], word['count']))
                 keywords_matched += 1
         return
+
+
+def resolve_duplicates(sorted_list):
+    """ Combine dulplicate keywords in list
+    """
+    keywords_processed = []
+    i = 0
+
+    while i < len(sorted_list):
+        if sorted_list[i]['keyword'] not in keywords_processed:
+            keywords_processed.append(sorted_list[i]['keyword'])
+            i += 1
+        else:
+            sorted_list[i - 1]['count'] += sorted_list[i]['count']
+            del sorted_list[i]
