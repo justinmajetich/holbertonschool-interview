@@ -68,6 +68,9 @@ def resolve_duplicates(sorted_list):
     i = 0
 
     while i < len(sorted_list):
+
+        sorted_list[i]['keyword'] = sorted_list[i]['keyword'].lower()
+
         if sorted_list[i]['keyword'] not in keywords_processed:
             keywords_processed.append(sorted_list[i]['keyword'])
             i += 1
