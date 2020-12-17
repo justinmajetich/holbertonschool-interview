@@ -49,7 +49,7 @@ def count_words(subreddit, word_list, count_list=[], next_page=None):
     else:
         # sort list by count
         sorted_list = sorted(count_list,
-                             key=lambda word: (word['count'], word['keyword']),
+                             key=lambda word: (word['count']),
                              reverse=True)
         resolve_duplicates(sorted_list)
         keywords_matched = 0
