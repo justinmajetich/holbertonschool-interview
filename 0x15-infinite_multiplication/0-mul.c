@@ -60,6 +60,9 @@ char *add_str(char *result, char *buffer, int i)
 	for (j = 0; j < i; j++)
 		new_result[j] = result[j];
 
+	printf("Buffer before addition: %s\n", buffer);
+	printf("Result before addition: %s\n", result);
+
 	for (k = 0; buffer[k] != '\0'; k++)
 	{
 		/* add digits */
@@ -77,6 +80,8 @@ char *add_str(char *result, char *buffer, int i)
 			}
 		}
 	}
+
+	printf("New result after addition: %s\n", new_result);
 	/* return sum */
 	return (new_result);
 }
@@ -112,19 +117,23 @@ char *mul_str(char *num1, char *num2)
 		carry = k = 0;
 		for (j = num2_len - 1; j >= 0; j--, k++) /* loop through num2 */
 		{
+			printf("Multipliplying: %i * %i\n", num1[i] - '0', num2[j] - '0');
 			prod = (num1[i] - '0') * (num2[j] - '0'); /* multiply converted chars */
 			buffer[k] = ((prod % 10) + carry) + '0'; /* grab remainder for digit */
 			carry = prod / 10; /* calculate carry */
+
+			printf("Carry during multiplication: %i\n", carry);
+			printf("Buffer during multiplication: %s\n", buffer);
 
 			if (j == 0) /* check for/add final carry */
 			{
 				if (carry != 0)
 				{
 					buffer[k + 1] = carry + '0';
-					buffer[k + 2] = '\0';
+					/* buffer[k + 2] = '\0'; */
 				}
-				else
-					buffer[k + 1] = '\0';
+				/* else */
+					/* buffer[k + 1] = '\0'; */
 			}
 		}
 		result = add_str(result, buffer, place_cnt); /* add buffer to result */
@@ -144,7 +153,7 @@ int main(int argc, char **argv)
 	char *num1 = argv[1];
 	char *num2 = argv[2];
 	char *product;
-	int i;
+	int i, carry;
 
 	/* check arg count */
 	if (argc != 3)
@@ -172,11 +181,20 @@ int main(int argc, char **argv)
 		}
 	}
 
+	for (i = str_len(product); i >= 0; i--) /* Scan to balance any remainders */
+	{
+		if (product[i] - '0' > 9)
+		{
+			carry = (product[i] - '0') - 10;
+			printf("Final carry: %i\n", carry);
+			product[i] = carry + '0';
+			product[i + 1]++;
+		}
+	}
+
 	/* print product string */
 	for (i = str_len(product); i >= 0; i--)
-	{
 		_putchar(product[i]);
-	}
 	_putchar('\n');
 
 	return (0);
