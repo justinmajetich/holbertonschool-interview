@@ -147,24 +147,20 @@ int main(int argc, char **argv)
 	char *product;
 	int i, carry;
 
-	/* check arg count */
-	if (argc != 3)
+	if (argc != 3) /* check arg count */
 	{
 		printf("Error\n");
 		exit(98);
 	}
 
-	/* check for non-digit */
-	if (!(_isdigit(num1) && _isdigit(num2)))
+	if (!(_isdigit(num1) && _isdigit(num2))) /* check for non-digit */
 	{
 		printf("Error\n");
 		exit(98);
 	}
-
 	product = mul_str(num1, num2); /* multiply number */
 
-    /* Remove trailing zeros */
-	for (i = str_len(product) - 1; i >= 0; i--)
+	for (i = str_len(product) - 1; i >= 0; i--) /* Remove trailing zeros */
 	{
 		if (product[i] != '0' || i == 0)
 		{
@@ -172,7 +168,6 @@ int main(int argc, char **argv)
 			break;
 		}
 	}
-
 	for (i = str_len(product); i >= 0; i--) /* Scan to balance any remainders */
 	{
 		if (product[i] - '0' > 9)
@@ -183,10 +178,8 @@ int main(int argc, char **argv)
 		}
 	}
 
-	/* print product string */
-	for (i = str_len(product); i >= 0; i--)
+	for (i = str_len(product); i >= 0; i--)	/* print product string */
 		_putchar(product[i]);
 	_putchar('\n');
-
 	return (0);
 }
