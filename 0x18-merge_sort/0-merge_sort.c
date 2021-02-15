@@ -1,4 +1,5 @@
 #include "sort.h"
+
 void _sort(int *arr, size_t left, size_t right, int *temp);
 void _merge(int *arr, size_t left, size_t mid, size_t right, int *temp);
 void _copy(int *arr, int *temp, size_t size);
