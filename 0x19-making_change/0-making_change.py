@@ -19,7 +19,7 @@ def makeChange(coins, total):
         while total >= coin:
             total -= coin
             coin_count += 1
-    
+
     # If total is not met perfectly, return -1.
     if total > 0:
         return -1
