@@ -12,6 +12,9 @@ List *add_node(List **list, char *str);
  */
 List *add_node_end(List **list, char *str)
 {
+	if (str == NULL)
+		return (NULL);
+
 	return (add_node(list, str));
 }
 
@@ -26,8 +29,20 @@ List *add_node_end(List **list, char *str)
 
 List *add_node_begin(List **list, char *str)
 {
-	*list = add_node(list, str);
-	return (*list);
+	List *new = NULL;
+
+	if (str == NULL)
+		return (NULL);
+
+	new = add_node(list, str);
+
+	if (new == NULL)
+	{
+		return (NULL);
+	}
+
+	*list = new;
+	return (new);
 }
 
 /**
