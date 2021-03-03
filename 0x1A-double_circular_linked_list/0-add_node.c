@@ -36,12 +36,10 @@ List *add_node_begin(List **list, char *str)
 
 	new = add_node(list, str);
 
-	if (new == NULL)
-	{
-		return (NULL);
-	}
+	/* If node insert did not fail, make new node head of list */
+	if (new != NULL)
+		*list = new;
 
-	*list = new;
 	return (new);
 }
 
