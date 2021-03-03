@@ -1,0 +1,78 @@
+#include "list.h"
+
+List *add_node(List **list, char *str);
+
+/**
+ * add_node_end - Add node to end of list.
+ *
+ * @list: A pointer to the head of the list to modify.
+ * @str: The string content to add to new node.
+ *
+ * Return: Address of added node; NULL on failure.
+ */
+List *add_node_end(List **list, char *str)
+{
+	return (add_node(list, str));
+}
+
+/**
+ * add_node_begin - Add node to beginning of list.
+ *
+ * @list: A pointer to the head of the list to modify.
+ * @str: The string content to add to new node.
+ *
+ * Return: Address of added node; NULL on failure.
+ */
+
+List *add_node_begin(List **list, char *str)
+{
+	*list = add_node(list, str);
+	return (*list);
+}
+
+/**
+ * add_node - Add node to beginning/end of list.
+ *
+ * @list: A pointer to the head of the list to modify.
+ * @str: The string content to add to new node.
+ *
+ * Return: Address of added node; NULL on failure.
+ */
+List *add_node(List **list, char *str)
+{
+	List *head = NULL, *tail = NULL, *new = NULL;
+
+	/* Set up new node. */
+	new = malloc(sizeof(List));
+	if (new == NULL)
+		return (NULL);
+	new->str = str;
+	new->prev = NULL;
+	new->next = NULL;
+
+	/* If list is empty, start with new node. */
+	if (*list == NULL)
+	{
+		new->prev = new;
+		new->next = new;
+		*list = new;
+		return (*list);
+	}
+	else
+	{
+		head = *list;
+		tail = (*list)->prev;
+
+		/* Point current head to new node. */
+		head->prev = new;
+
+		/* Point current tail to new node. */
+		tail->next = new;
+
+		/* Point new node to surrounding nodes. */
+		new->next = head;
+		new->prev = tail;
+	}
+
+	return (new);
+}
