@@ -62,6 +62,9 @@ List *add_node(List **list, char *str)
 		return (NULL);
 
 	new->str = strdup(str);
+	if (new->str == NULL)
+		return (NULL);
+
 	new->prev = NULL;
 	new->next = NULL;
 
