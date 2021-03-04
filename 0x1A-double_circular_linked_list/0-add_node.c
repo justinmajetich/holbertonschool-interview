@@ -1,4 +1,5 @@
 #include "list.h"
+#include "string.h"
 
 List *add_node(List **list, char *str);
 
@@ -60,7 +61,7 @@ List *add_node(List **list, char *str)
 	if (new == NULL)
 		return (NULL);
 
-	new->str = str;
+	new->str = strdup(str);
 	new->prev = NULL;
 	new->next = NULL;
 
