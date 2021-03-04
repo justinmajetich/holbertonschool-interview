@@ -59,6 +59,7 @@ List *add_node(List **list, char *str)
 	new = malloc(sizeof(List));
 	if (new == NULL)
 		return (NULL);
+
 	new->str = str;
 	new->prev = NULL;
 	new->next = NULL;
@@ -69,7 +70,6 @@ List *add_node(List **list, char *str)
 		new->prev = new;
 		new->next = new;
 		*list = new;
-		return (*list);
 	}
 	else
 	{
