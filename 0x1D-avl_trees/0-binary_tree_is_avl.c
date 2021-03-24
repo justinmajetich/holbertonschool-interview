@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+
 int recurse_for_is_bst(const binary_tree_t *tree, int min, int max);
 size_t recurse_for_height(const binary_tree_t *tree);
 int binary_tree_balance(const binary_tree_t *tree);
